@@ -140,22 +140,22 @@ class BinarySearchTree {
         return node;
     } else {
         if (node.left === null && node.right === null) {
-            node = null;
-            return node;
+            return null;
         }
         if (node.left === null) {
-            node = node.right;
-            return node;
+            return node.right;
         } else if(node.right === null) {
-            node = node.left;
-            return node;
+            return node.left;
         }
-        let newNode = this.minNode(node.right);
-        node.data = newNode.data;
-        node.right = this.removeNode(node.right, newNode.data);
+        let minRight = node.right;
+        while (minRight.left !== null) {
+            minRight = minRight.left;
+        }
+        node.data = minRight.data;
+        node.right = this.removeNode(node.right, minRight.data);
         return node;
     }
-}
+  }
 
 
 }
